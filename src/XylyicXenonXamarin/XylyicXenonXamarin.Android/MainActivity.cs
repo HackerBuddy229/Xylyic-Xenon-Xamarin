@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Reflection;
 using Android.App;
 using Android.Content.PM;
 using Android.Runtime;
@@ -16,7 +16,7 @@ namespace XylyicXenonXamarin.Droid
         {
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
-
+            
             base.OnCreate(savedInstanceState);
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);

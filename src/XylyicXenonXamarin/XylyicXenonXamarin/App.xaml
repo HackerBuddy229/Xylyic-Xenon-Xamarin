@@ -3,6 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="XylyicXenonXamarin.App">
     <Application.Resources>
-
-    </Application.Resources>
+		<Color x:Key="AccentColor">#03DAC5</Color>
+		<Color x:Key="ButtonColor">#f71735</Color>
+		<Color x:Key="PrimaryColor">#6200EE</Color>
+		<Color x:Key="ColorPrimaryDark">#3700B3</Color>
+		<Color x:Key="DebugColor">DimGray</Color>
+	</Application.Resources>
 </Application>
