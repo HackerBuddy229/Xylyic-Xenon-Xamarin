@@ -61,12 +61,13 @@
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="services\ToastService.cs" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\adjectives.list" />
     <AndroidAsset Include="Assets\nouns.list" />
     <None Include="Resources\AboutResources.txt" />
-    <AndroidAsset Include="Assets\AboutAssets.txt" />
+    <None Include="Assets\AboutAssets.txt" />
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>

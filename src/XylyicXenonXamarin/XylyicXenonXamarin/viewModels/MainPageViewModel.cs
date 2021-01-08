@@ -6,18 +6,48 @@ using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using XylyicXenonXamarin.Annotations;
+using XylyicXenonXamarin.interfaces;
 using XylyicXenonXamarin.services;
 
-namespace XylyicXenonXamarin.viewModels
+namespace XylyicXenonXamarin.ViewModels
 {
     public class MainPageViewModel : INotifyPropertyChanged
     {
         private readonly IProjectNameBuilderService _projectNameBuilderService;
+        private readonly IToastService _toastService;
 
-        public MainPageViewModel(IProjectNameBuilderService projectNameBuilderService)
+        private readonly string _aboutMessage = "Welcome... \n" +
+                                                "This app allows you to generate project names for use with your\n" +
+                                                "various projects.\n" +
+                                                "Just press the \'We can do better\' button \n" +
+                                                "to get started." +
+                                                "\n \n \n" +
+                                                "This app was made by: \n" +
+                                                "Rasmus Bengtsson\n" +
+                                                "The credit for the picture goes to: \n" +
+                                                "Jonny James - Unsplash\n" +
+                                                $"Beryllium Apps\u00a9 - {DateTime.UtcNow.Year}";
+
+        public MainPageViewModel(IProjectNameBuilderService projectNameBuilderService, IToastService toastService)
         {
             _projectNameBuilderService = projectNameBuilderService;
+            _toastService = toastService;
+
             RefreshCommand = new Command( async () => await RefreshProjectName());
+
+            ShowInfoCommand = new Command(async () 
+                => await Application.Current.MainPage.DisplayAlert("About", _aboutMessage, "Ok"));
+
+            CopyNameCommand = new Command(async () =>
+            {
+                await Clipboard.SetTextAsync(ProjectName);
+                _toastService.CreateToast("Project name copied!");
+            });
+
+            NavigateToAdvancedCommand = new Command(async () =>
+            {
+                await Application.Current.MainPage.Navigation.PushModalAsync(new AdvancedSettingsPage());
+            });
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -51,5 +81,7 @@ namespace XylyicXenonXamarin.viewModels
 
         public Command RefreshCommand { get; }
         public Command NavigateToAdvancedCommand { get; }
+        public Command ShowInfoCommand { get; }
+        public Command CopyNameCommand { get; }
     }
 }

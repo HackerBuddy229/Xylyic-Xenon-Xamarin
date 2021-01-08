@@ -10,6 +10,7 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
 
+
   <ItemGroup>
     <PackageReference Include="Autofac" Version="6.1.0" />
     <PackageReference Include="Resizetizer.NT" Version="0.2.0" />
@@ -18,10 +19,14 @@
   </ItemGroup>
 
 	<ItemGroup>
-    <Folder Include="images\" />
-  </ItemGroup>
+		<SharedImage Include="images/backgroundmountain16by9.png" BaseSize="1280,2275" />
+		<SharedImage Include="images/help96.png" BaseSize="96,96" />
+        <SharedImage Include="images/question.png" BaseSize="45,45" />
+	</ItemGroup>
 
 	<ItemGroup>
-		<SharedImage Include="images/backgroundmountain16by9.png" BaseSize="1280,2275" />
+	  <EmbeddedResource Update="AdvancedSettingsPage.xaml">
+	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	  </EmbeddedResource>
 	</ItemGroup>
 </Project>

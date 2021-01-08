@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Autofac;
 using Autofac.Core;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using XylyicXenonXamarin.interfaces;
 using XylyicXenonXamarin.services;
-using XylyicXenonXamarin.viewModels;
+using XylyicXenonXamarin.ViewModels;
 
 namespace XylyicXenonXamarin
 {
@@ -18,7 +20,17 @@ namespace XylyicXenonXamarin
 
             var container = SetupContainer();
 
-            var mainPage = new MainPage {BindingContext = container.Resolve<MainPageViewModel>()};
+            var mainPage = new MainPage(container.Resolve<MainPageViewModel>());
+            Task.Run(async () =>
+            {
+                if (mainPage.BindingContext is MainPageViewModel wm)
+                    await wm.RefreshProjectName();
+            });
+
+            //if (mainPage.BindingContext is MainPageViewModel wm)
+            //    wm.RefreshProjectName().ConfigureAwait(false).GetAwaiter().GetResult();
+
+
             MainPage = new NavigationPage(mainPage);
         }
 
@@ -37,6 +49,10 @@ namespace XylyicXenonXamarin
             builder.RegisterType<ProjectNameBuilderService>()
                 .As<IProjectNameBuilderService>()
                 .InstancePerLifetimeScope();
+
+            builder.Register(c => DependencyService.Resolve<IToastService>())
+                    .As<IToastService>()
+                    .InstancePerLifetimeScope();
 
             return builder.Build();
         }

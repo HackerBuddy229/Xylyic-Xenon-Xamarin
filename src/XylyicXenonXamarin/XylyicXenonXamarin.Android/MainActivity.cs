@@ -6,6 +6,9 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Xamarin.Forms;
+using XylyicXenonXamarin.Droid.services;
+using XylyicXenonXamarin.interfaces;
 
 namespace XylyicXenonXamarin.Droid
 {
@@ -14,6 +17,8 @@ namespace XylyicXenonXamarin.Droid
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            DependencyService.Register<IToastService, ToastService>();
+
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
             

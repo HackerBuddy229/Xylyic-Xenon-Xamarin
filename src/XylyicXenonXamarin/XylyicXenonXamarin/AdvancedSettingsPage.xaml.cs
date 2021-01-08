@@ -1,27 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 using Xamarin.Forms;
-using XylyicXenonXamarin.ViewModels;
+using Xamarin.Forms.Xaml;
 
 namespace XylyicXenonXamarin
 {
-    public partial class MainPage : ContentPage
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class AdvancedSettingsPage : ContentPage
     {
-
-        
-        public MainPage(MainPageViewModel bindingContext)
+        public AdvancedSettingsPage()
         {
-            BindingContext = bindingContext;
             InitializeComponent();
         }
-
-
-
-
-
     }
 }
