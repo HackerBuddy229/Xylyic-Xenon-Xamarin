@@ -3,12 +3,44 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:XylyicXenonXamarin.ViewModels;assembly=XylyicXenonXamarin"
              x:Class="XylyicXenonXamarin.AdvancedSettingsPage"
-             BackgroundImageSource="backgroundmountain16by9.png">
+             BackgroundImageSource="backgroundmountain16by9.png"
+             x:DataType="local:AdvancedSettingsPageViewModel"
+             NavigationPage.HasNavigationBar="True"
+             Title="Settings">
     <ContentPage.Content>
-        <StackLayout x:DataType="local:AdvancedSettingsPageViewModel">
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+
+		
+
+		<StackLayout>
+            <StackLayout Orientation="Horizontal" Margin="20">
+	            <CheckBox IsChecked="{Binding DisplayPrefix}"/>
+	            <Label Text="Show Prefix in project name"
+	                   FontSize="Medium"
+	                   VerticalTextAlignment="Center"/>
+			</StackLayout>
+		    <StackLayout Orientation="Vertical" Margin="20">
+			    <Editor Text="{Binding Prefix}" Placeholder="Project"/>
+				<Label Text="Project Name Prefix"
+				       FontSize="Medium"/>
+		    </StackLayout>
+
+
+			<ScrollView IsEnabled="{Binding ShowHistory}" Margin="20">
+				<ListView ItemsSource="{Binding History}" 
+				          SelectionMode="None" ItemTapped="OnItemTapped">
+					<ListView.Header>
+						<Label Text="History" FontSize="Large"/>
+					</ListView.Header>
+					<ListView.ItemTemplate>
+						<DataTemplate>
+							<TextCell Text="{Binding .}" TextColor="Black"/>
+						</DataTemplate>
+					</ListView.ItemTemplate>
+
+				</ListView>
+			</ScrollView>
+			
+	    </StackLayout>
+
     </ContentPage.Content>
 </ContentPage>

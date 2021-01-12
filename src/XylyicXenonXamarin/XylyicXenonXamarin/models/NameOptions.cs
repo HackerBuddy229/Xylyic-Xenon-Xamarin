@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using XylyicXenonXamarin.interfaces;
 
-namespace XylyicXenonXamarin.services
+namespace XylyicXenonXamarin.models
 {
-    public interface IProjectNameBuilderService
+    public class NameOptions : INameOptions
     {
-        Task<string> GetProjectName(INameOptions options = null);
+        public bool UsePrefix { get; set; }
+        public string Prefix { get; set; }
     }
 }

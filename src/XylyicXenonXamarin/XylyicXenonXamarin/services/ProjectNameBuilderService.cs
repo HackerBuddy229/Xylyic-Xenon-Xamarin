@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using XylyicXenonXamarin.interfaces;
+using XylyicXenonXamarin.models;
 
 namespace XylyicXenonXamarin.services
 {
@@ -17,9 +19,12 @@ namespace XylyicXenonXamarin.services
             _rng = new Random();
         }
 
-        public async Task<string> GetProjectName()
+        public async Task<string> GetProjectName(INameOptions options = null)
         {
-            var builder = new StringBuilder("Project ");
+            options = options ?? new NameOptions();
+            var prefix = options.UsePrefix ? options.Prefix + " " : string.Empty;
+
+            var builder = new StringBuilder(prefix);
 
             var adjectives = await _fileStorageService.GetAdjectives();
             var adjective = adjectives[_rng.Next(0, adjectives.Count - 1)];
